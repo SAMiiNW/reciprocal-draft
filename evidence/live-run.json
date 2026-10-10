@@ -1,0 +1,63 @@
+{
+  "boardId": "DRAFT-1791670366",
+  "contract": "0xA3F6e217C7d8646484807816ADb33EA77AfFc2AA",
+  "transactions": {
+    "open": "0x09c9925eb2676464fe20a2531c485e402ec5f53d4749a173d718c82d6e96932a",
+    "NEED-ACCESS-1791670366": "0x362a64317ecb6b5860841889def9f1f204d45994b4ad82be6e711b89cde0e74d",
+    "NEED-OFFLINE-1791670366": "0xcf83dbb60f3e7196e9ba63347accb207d809a2f437e11a6f07f5f9782e6ae66b",
+    "OFFER-ACCESS-1791670366": "0x7a0dbd538ee9a18be1b5b13b86f91d67f80b0cebebb4713c89fa2788d2fbab50",
+    "OFFER-OFFLINE-1791670366": "0xf6988ffb45e3e7dd32ea3557b23812bc3205d286921eabaebe7813eaa5069d8b",
+    "replay": "0x3fbdbb9e5a2c7baf87793b8d7f4dbb6e4107be17f8ba0415741eeab82a706b3f",
+    "draw": "0x93a321714ec1419a3920af04747951ccf90ccbd0ed32dff9c89ada9316961326"
+  },
+  "final": {
+    "criterion": "Pair a need and an offer only when the offer explicitly covers every material requirement in the need, without a stated exclusion that defeats delivery.",
+    "id": "DRAFT-1791670366",
+    "needs": [
+      {
+        "id": "NEED-ACCESS-1791670366",
+        "label": "Accessibility review needed",
+        "owner": "0xCAFA30BF94D4fb01146588a1b7901BD85E7DbD0f"
+      },
+      {
+        "id": "NEED-OFFLINE-1791670366",
+        "label": "Offline resilience review needed",
+        "owner": "0xCAFA30BF94D4fb01146588a1b7901BD85E7DbD0f"
+      }
+    ],
+    "offers": [
+      {
+        "id": "OFFER-ACCESS-1791670366",
+        "label": "Inclusive interface lab",
+        "owner": "0xCAFA30BF94D4fb01146588a1b7901BD85E7DbD0f"
+      },
+      {
+        "id": "OFFER-OFFLINE-1791670366",
+        "label": "Resilience bench",
+        "owner": "0xCAFA30BF94D4fb01146588a1b7901BD85E7DbD0f"
+      }
+    ],
+    "pairs": [
+      [
+        "NEED-ACCESS-1791670366",
+        "OFFER-ACCESS-1791670366"
+      ],
+      [
+        "NEED-OFFLINE-1791670366",
+        "OFFER-OFFLINE-1791670366"
+      ]
+    ],
+    "state": "DRAWN",
+    "steward": "0xCAFA30BF94D4fb01146588a1b7901BD85E7DbD0f",
+    "title": "Civic software exchange"
+  },
+  "duplicateProfile": {
+    "consensus": "MAJORITY_AGREE",
+    "execution": [
+      "ERROR",
+      "ERROR"
+    ],
+    "stateUnchanged": true
+  },
+  "fixtureDisclosure": "Profiles and wallet are operator-controlled fixtures used to prove digest pinning, complete compatibility-edge consensus, deterministic pairing, and URL replay rejection."
+}
