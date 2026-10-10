@@ -7,5 +7,7 @@ def test_contract_guards():
 def test_frontend_finality():
  s=(ROOT/'docs/index.html').read_text()
  assert 'WAITING FOR FINALIZED' in s and 'status:"FINALIZED"' in s
- assert 'west-rail' in s and 'east-rail' in s
+ assert 'boardDialog' in s and 'entryDialog' in s
+ assert 'data-side="NEED"' in s and 'data-side="OFFER"' in s
+ assert 'class="drawer"' not in s
 
