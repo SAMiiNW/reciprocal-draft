@@ -30,7 +30,7 @@ label{font-size:10px;display:block;margin-bottom:5px}input,textarea{width:100%;b
 </div><pre class="readout" id="out"></pre>
 <script type="module">
 import{createClient}from"https://esm.sh/genlayer-js@1.1.8";import{studionet}from"https://esm.sh/genlayer-js@1.1.8/chains";
-const ADDRESS="__CONTRACT_ADDRESS__",ENDPOINT="https://studio.genlayer.com/api",$=s=>document.querySelector(s);let client;
+const ADDRESS="0xA3F6e217C7d8646484807816ADb33EA77AfFc2AA",ENDPOINT="https://studio.genlayer.com/api",$=s=>document.querySelector(s);let client;
 const out=x=>{const el=$("#out");el.style.display="block";el.textContent=typeof x==="string"?x:JSON.stringify(x,(_,v)=>typeof v==="bigint"?v.toString():v,2)};
 const stat=x=>$("#status").textContent=x;
 async function connect(){if(!window.ethereum)throw Error("Install MetaMask or Rabby.");const[a]=await ethereum.request({method:"eth_requestAccounts"});client=createClient({chain:studionet,endpoint:ENDPOINT,account:a,provider:ethereum});$("#connect").textContent="WALLET LINKED";return client}
