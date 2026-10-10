@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reciprocal Draft</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600&display=swap');
+*{box-sizing:border-box}body{margin:0;background:#f2efdf;color:#16251c;font-family:DM Mono,monospace;min-height:100vh}
+button,input,textarea{font:inherit}.top{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;border-bottom:2px solid #16251c;background:#ff6d38}
+.brand{font:600 28px Fraunces,serif}.brand small{display:block;font:11px DM Mono;letter-spacing:.15em}
+button{border:2px solid #16251c;background:#f2efdf;padding:10px 14px;cursor:pointer;box-shadow:3px 3px 0 #16251c}button:hover{transform:translate(2px,2px);box-shadow:1px 1px 0}
+.layout{display:grid;grid-template-columns:270px 1fr 270px;min-height:620px}.rail{padding:22px;border-right:2px solid #16251c;background:#dff0d0}.east-rail{border-right:0;border-left:2px solid #16251c;background:#d9e8ff}
+.rail h2{font:600 22px Fraunces;margin:0 0 4px}.rail p{font-size:11px;line-height:1.5}.node{border:2px solid #16251c;background:#fff;padding:12px;margin:12px 0;position:relative}.node b{display:block}.node small{opacity:.65}
+.field{position:relative;padding:30px;overflow:hidden}.field h1{font:600 clamp(42px,7vw,94px)/.86 Fraunces;margin:10px 0;max-width:800px}.field .lead{max-width:640px;line-height:1.55}
+#threads{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.pair-list{position:relative;margin-top:34px;display:grid;gap:10px}.pair{background:#16251c;color:#fff;padding:14px;display:flex;justify-content:space-between}.status{display:inline-block;border:2px solid #16251c;padding:7px 10px;background:#ffe97c}
+.drawer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:3px solid #16251c;padding:14px 22px;display:grid;grid-template-columns:1fr 1fr 1.5fr auto;gap:10px;align-items:end;z-index:5}
+label{font-size:10px;display:block;margin-bottom:5px}input,textarea{width:100%;border:2px solid #16251c;padding:9px;background:#fff}textarea{height:62px;resize:vertical}.actions{display:flex;gap:8px;flex-wrap:wrap}.readout{position:fixed;right:20px;top:82px;max-width:430px;background:#16251c;color:#fff;padding:12px;font-size:11px;z-index:6;display:none}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.rail{border:0;border-bottom:2px solid}.east-rail{border-left:0}.drawer{position:static;grid-template-columns:1fr}.field{min-height:420px}}
+</style></head>
+<body>
+<header class="top"><div class="brand">Reciprocal Draft<small>MUTUAL FIT, DRAWN IN PUBLIC</small></div><button id="connect">LINK WALLET</button></header>
+<div class="layout">
+<aside class="rail west-rail"><h2>Needs</h2><p>Requirements enter from the west rail.</p><div id="needs"></div></aside>
+<main class="field"><svg id="threads"></svg><span class="status" id="status">BOARD IDLE</span><h1>Do not rank people.<br>Find the fit.</h1><p class="lead">Validators draw only mutual compatibility edges. The contract converts that graph into deterministic one-to-one pairs.</p><div class="pair-list" id="pairs"><div class="pair"><span>No draft loaded</span><span>↔</span></div></div></main>
+<aside class="rail east-rail"><h2>Offers</h2><p>Capabilities enter from the east rail.</p><div id="offers"></div></aside>
+</div>
+<div class="drawer">
+<div><label>BOARD / ENTRY ID</label><input id="board" value="DRAFT-REVIEW"><input id="entry" value="NEED-ACCESS"></div>
+<div><label>TITLE / LABEL</label><input id="title" value="Civic software exchange"><input id="label" value="Accessibility review needed"></div>
+<div><label>CRITERION / PROFILE URL</label><textarea id="criterion">Pair a need and an offer only when the offer explicitly covers every material requirement in the need, without a stated exclusion that defeats delivery.</textarea><input id="url" value="https://raw.githubusercontent.com/SAMiiNW/reciprocal-draft/main/fixtures/need-access.md"></div>
+<div class="actions"><button id="open">OPEN BOARD</button><button id="need">ENTER NEED</button><button id="offer">ENTER OFFER</button><button id="draw">DRAW PAIRS</button><button id="load">LOAD</button></div>
+</div><pre class="readout" id="out"></pre>
+<script type="module">
+import{createClient}from"https://esm.sh/genlayer-js@1.1.8";import{studionet}from"https://esm.sh/genlayer-js@1.1.8/chains";
+const ADDRESS="__CONTRACT_ADDRESS__",ENDPOINT="https://studio.genlayer.com/api",$=s=>document.querySelector(s);let client;
+const out=x=>{const el=$("#out");el.style.display="block";el.textContent=typeof x==="string"?x:JSON.stringify(x,(_,v)=>typeof v==="bigint"?v.toString():v,2)};
+const stat=x=>$("#status").textContent=x;
+async function connect(){if(!window.ethereum)throw Error("Install MetaMask or Rabby.");const[a]=await ethereum.request({method:"eth_requestAccounts"});client=createClient({chain:studionet,endpoint:ENDPOINT,account:a,provider:ethereum});$("#connect").textContent="WALLET LINKED";return client}
+async function send(name,args){const c=client||await connect();stat("SUBMITTED / "+name);const hash=await c.writeContract({address:ADDRESS,functionName:name,args,value:0n});stat("ACCEPTED / WAITING FOR FINALIZED");const receipt=await c.waitForTransactionReceipt({hash,status:"FINALIZED",retries:180,interval:5000});if(String(receipt.result_name??receipt.resultName??"").toUpperCase()!=="MAJORITY_AGREE")throw Error("FINALIZED WITHOUT AGREEMENT");stat("FINALIZED / "+name);out({hash,receipt});return hash}
+function drawBoard(x){$("#needs").innerHTML=x.needs.map(n=>'<div class="node"><b>'+n.label+'</b><small>'+n.id+'</small></div>').join("")||'<p>Empty west rail</p>';$("#offers").innerHTML=x.offers.map(n=>'<div class="node"><b>'+n.label+'</b><small>'+n.id+'</small></div>').join("")||'<p>Empty east rail</p>';$("#pairs").innerHTML=x.pairs.length?x.pairs.map(p=>'<div class="pair"><span>'+p[0]+'</span><span>↔</span><span>'+p[1]+'</span></div>').join(""):'<div class="pair"><span>Awaiting draw</span><span>↔</span></div>';stat(x.state+" / "+x.needs.length+" NEEDS / "+x.offers.length+" OFFERS");out(x)}
+async function read(){const c=client||createClient({chain:studionet,endpoint:ENDPOINT});const x=await c.readContract({address:ADDRESS,functionName:"get_board",args:[$("#board").value.trim()]});drawBoard(x);return x}
+$("#connect").onclick=()=>connect().catch(e=>out(e.message));$("#open").onclick=async()=>{try{await send("open_board",[$("#board").value,$("#title").value,$("#criterion").value]);await read()}catch(e){out(e.message)}};
+async function enter(side){try{await send("enter",[$("#board").value,$("#entry").value,side,$("#label").value,$("#url").value]);await read()}catch(e){out(e.message)}}
+$("#need").onclick=()=>enter("NEED");$("#offer").onclick=()=>enter("OFFER");$("#draw").onclick=async()=>{try{await send("draw",[$("#board").value]);await read()}catch(e){out(e.message)}};$("#load").onclick=()=>read().catch(e=>out(e.message));
+</script></body></html>
