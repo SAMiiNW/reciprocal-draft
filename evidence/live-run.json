@@ -1,50 +1,50 @@
 {
-  "boardId": "DRAFT-1791670366",
-  "contract": "0xA3F6e217C7d8646484807816ADb33EA77AfFc2AA",
+  "boardId": "DRAFT-1792201268",
+  "contract": "0x38928d08c8B87a923FC4aAfD90c605b2fBa692e6",
   "transactions": {
-    "open": "0x09c9925eb2676464fe20a2531c485e402ec5f53d4749a173d718c82d6e96932a",
-    "NEED-ACCESS-1791670366": "0x362a64317ecb6b5860841889def9f1f204d45994b4ad82be6e711b89cde0e74d",
-    "NEED-OFFLINE-1791670366": "0xcf83dbb60f3e7196e9ba63347accb207d809a2f437e11a6f07f5f9782e6ae66b",
-    "OFFER-ACCESS-1791670366": "0x7a0dbd538ee9a18be1b5b13b86f91d67f80b0cebebb4713c89fa2788d2fbab50",
-    "OFFER-OFFLINE-1791670366": "0xf6988ffb45e3e7dd32ea3557b23812bc3205d286921eabaebe7813eaa5069d8b",
-    "replay": "0x3fbdbb9e5a2c7baf87793b8d7f4dbb6e4107be17f8ba0415741eeab82a706b3f",
-    "draw": "0x93a321714ec1419a3920af04747951ccf90ccbd0ed32dff9c89ada9316961326"
+    "open": "0xfdae1183f6482b389573e30e2594cfa937433f6d504fb44203c250f80a98624e",
+    "NEED-ACCESS-1792201268": "0x3f0b3088c68f4c9874e9588f4f4566ef045bba5ed8d4ff44cb860c7d9b27eb67",
+    "NEED-OFFLINE-1792201268": "0x6c46d6d81c2cbbe26c5a8a4de07faec0b4fad18da0b007202557e1669118391a",
+    "OFFER-ACCESS-1792201268": "0x76323638ef788a03f4e3f5bd8325023a8646683edc7af3bd1ba53ff3bf5ef4a0",
+    "OFFER-OFFLINE-1792201268": "0x9e1fc78c64a32764f4b8137c7e17057db01f80ad6c9cbbaccfc92ce5fa6f74fb",
+    "replay": "0x155bde80fd2c5ad8ee5b80ee049103cc32866dbd100e5115ac5c1cc90a13f7cf",
+    "draw": "0xb7a34183ea6931d9a8c88442b2548530dadf852e6f3971c4706834b4621c2145"
   },
   "final": {
     "criterion": "Pair a need and an offer only when the offer explicitly covers every material requirement in the need, without a stated exclusion that defeats delivery.",
-    "id": "DRAFT-1791670366",
+    "id": "DRAFT-1792201268",
     "needs": [
       {
-        "id": "NEED-ACCESS-1791670366",
+        "id": "NEED-ACCESS-1792201268",
         "label": "Accessibility review needed",
         "owner": "0xCAFA30BF94D4fb01146588a1b7901BD85E7DbD0f"
       },
       {
-        "id": "NEED-OFFLINE-1791670366",
+        "id": "NEED-OFFLINE-1792201268",
         "label": "Offline resilience review needed",
         "owner": "0xCAFA30BF94D4fb01146588a1b7901BD85E7DbD0f"
       }
     ],
     "offers": [
       {
-        "id": "OFFER-ACCESS-1791670366",
+        "id": "OFFER-ACCESS-1792201268",
         "label": "Inclusive interface lab",
         "owner": "0xCAFA30BF94D4fb01146588a1b7901BD85E7DbD0f"
       },
       {
-        "id": "OFFER-OFFLINE-1791670366",
+        "id": "OFFER-OFFLINE-1792201268",
         "label": "Resilience bench",
         "owner": "0xCAFA30BF94D4fb01146588a1b7901BD85E7DbD0f"
       }
     ],
     "pairs": [
       [
-        "NEED-ACCESS-1791670366",
-        "OFFER-ACCESS-1791670366"
+        "NEED-ACCESS-1792201268",
+        "OFFER-ACCESS-1792201268"
       ],
       [
-        "NEED-OFFLINE-1791670366",
-        "OFFER-OFFLINE-1791670366"
+        "NEED-OFFLINE-1792201268",
+        "OFFER-OFFLINE-1792201268"
       ]
     ],
     "state": "DRAWN",

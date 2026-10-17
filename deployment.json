@@ -1,9 +1,9 @@
 {
   "network": "StudioNet",
-  "contractAddress": "0xA3F6e217C7d8646484807816ADb33EA77AfFc2AA",
-  "deploymentTransaction": "0x21a0c87c66085a4e035a93dcfa8a06ff3ff1d6d41af5f73d12f78318d78d6d84",
-  "sourceSha256": "93ea994e3532a59a9b44f03c78401588715c5b16d1b3b0f88441f49b27c1dd3e",
-  "sourceCommit": "a727d54993431035f4eb2f6be7eb42387515139e",
+  "contractAddress": "0x38928d08c8B87a923FC4aAfD90c605b2fBa692e6",
+  "deploymentTransaction": "0x4b6ad4d3ae5992e4943884acb402289c83b56ea2e35ed1826dcb1a8aa7f8c6b7",
+  "sourceSha256": "0b9d213ff7e3f2891ec8c114e2ea9383abc91b2f9b0491e74c1d9cd1f7cc1734",
+  "sourceCommit": "3cfdbf88c44ab5b09b61a3d7c71e6e4b19915266",
   "repository": "https://github.com/SAMiiNW/reciprocal-draft",
   "publicSite": "https://reciprocal-draft.pages.dev/"
 }

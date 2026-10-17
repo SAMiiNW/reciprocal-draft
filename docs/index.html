@@ -26,7 +26,7 @@ dialog{border:0;padding:0;background:transparent;color:var(--ink);width:min(720p
 <div class="toast" id="toast"></div>
 <script type="module">
 import{createClient}from"https://esm.sh/genlayer-js@1.1.8";import{studionet}from"https://esm.sh/genlayer-js@1.1.8/chains";
-const ADDRESS="0xA3F6e217C7d8646484807816ADb33EA77AfFc2AA",ENDPOINT="https://studio.genlayer.com/api",$=s=>document.querySelector(s);let client,currentBoard="",lastState=null;
+const ADDRESS="0x38928d08c8B87a923FC4aAfD90c605b2fBa692e6",ENDPOINT="https://studio.genlayer.com/api",$=s=>document.querySelector(s);let client,currentBoard="",lastState=null;
 const toast=(x,sticky=false)=>{const e=$("#toast");e.textContent=typeof x==="string"?x:JSON.stringify(x,(_,v)=>typeof v==="bigint"?v.toString():v);e.classList.add("on");if(!sticky)setTimeout(()=>e.classList.remove("on"),4200)};const status=x=>$("#status").textContent=x;
 async function connect(){if(!window.ethereum)throw Error("Install MetaMask or Rabby.");const[a]=await ethereum.request({method:"eth_requestAccounts"});client=createClient({chain:studionet,endpoint:ENDPOINT,account:a,provider:ethereum});$("#connect").textContent=a.slice(0,6)+"…"+a.slice(-4);return client}
 async function send(name,args){const c=client||await connect();status("SUBMITTED · "+name.toUpperCase());const hash=await c.writeContract({address:ADDRESS,functionName:name,args,value:0n});status("ACCEPTED · WAITING FOR FINALIZED");const receipt=await c.waitForTransactionReceipt({hash,status:"FINALIZED",retries:180,interval:5000});if(String(receipt.result_name??receipt.resultName??"").toUpperCase()!=="MAJORITY_AGREE")throw Error("FINALIZED WITHOUT AGREEMENT");status("FINALIZED · "+name.toUpperCase());toast("Finalized: "+hash);return hash}
